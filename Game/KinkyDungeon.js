@@ -733,7 +733,6 @@ function KinkyDungeonLoad() {
 			Object.assign(KinkyDungeonKeybindingsTemp, KinkyDungeonKeybindings);
 			console.log(KinkyDungeonKeybindings);
 		}
-		else console.log("Failed to load keybindings");
 
 		if (KinkyDungeonIsPlayer()) {
 			//if (!KDPatched && KinkyDungeonState == "Consent")
@@ -817,10 +816,6 @@ let KDRestart = false;
 let fpscounter = 0;
 let lastfps = 0;
 let dispfps = 60;
-
-async function sleep(msec) {
-	return new Promise(resolve => setTimeout(resolve, msec));
-}
 
 let KDMarkAsCache = [];
 

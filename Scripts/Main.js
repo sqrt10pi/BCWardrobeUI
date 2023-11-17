@@ -34,157 +34,79 @@ function suppressCanvasUpdate(fn) {
 	return ret;
 }
 
-window.onload = function() {
-	ArcadeDeviousDungeonChallenge = false;
-	KinkyDungeonRootDirectory = "Game/";
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-	// window.onload in index.html
-	ServerURL = "foobar";
-	CommonIsMobile = CommonDetectMobile();
-	TranslationLoad();
-	DrawLoad();
-	AssetLoadAll();
-	ControllerActive = false;
-	let _TextLoad = TextLoad; // Avoid nonexistent text query
-	TextLoad = () => {};
-	CommonSetScreen("KinkyDungeon", "KinkyDungeonMain");
-	TextLoad = _TextLoad;
-	MainRun(0);
+let hasInit = false;
+let ctxStash;
 
-	// LoginLoad
-	Character = [];
-	CharacterNextId = 1;
-	suppressCanvasUpdate(() => CharacterReset(0, "Female3DCG"));
-
-	Player.ArousalSettings = {};
-	Player.ArousalSettings.VFXFilter = "VFXFilterHeavy";
-	Player.OnlineSharedSettings = {};
-	Player.OnlineSharedSettings.ItemsAffectExpressions = true
-	Player.AudioSettings = {};
-	Player.AudioSettings.Volume = 1;
-	Player.ImmersionSettings = {};
-
-	CharacterLoadCSVDialog(Player);
-
-	CharacterAppearanceSetDefault(Player);
-	CurrentCharacter = null;
-	MiniGameStart("KinkyDungeon", 1, "ArcadeKinkyDungeonEnd");
-
-	// Default keybindings, these are initialized as part of the Player
-	KinkyDungeonKeybindings = {
-		Down: "KeyS",
-		DownLeft: "KeyZ",
-		DownRight: "KeyC",
-		Left: "KeyA",
-		Right: "KeyD",
-		Skip: "Space",
-		Spell1: "Digit1",
-		Spell2: "Digit2",
-		Spell3: "Digit3",
-		Spell4: "Digit4",
-		Spell5: "Digit5",
-		Up: "KeyW",
-		UpLeft: "KeyQ",
-		UpRight: "KeyE",
-		Wait: "KeyX",
-	};
-	if (localStorage.getItem("KinkyDungeonKeybindings") && JSON.parse(localStorage.getItem("KinkyDungeonKeybindings"))) {
-		KinkyDungeonKeybindings = JSON.parse(localStorage.getItem("KinkyDungeonKeybindings"));
+function init(){
+	if (hasInit) {
+		return ctxStash
 	}
+
+	AssetLoadAll();
+
+	const canvas = document.createElement("canvas");
+	canvas.style.background = "red";
+	canvas.height = 1000;
+	canvas.width = 2000;
+	const ctx = canvas.getContext("2d");
+	ctxStash = ctx;
+	hasInit = true;
+
+	MainCanvas = {};
+
+	return ctx;
+}
+
+async function doIt(ctx) {
+	let Char = CharacterReset(0, "Female3DCG");
+
+	await sleep(50);
+
+	DrawCharacter(Char, 1, 0, 1, true, ctx)
+
+	const imgsrc = cropImageFromCanvas(ctx)
+	return imgsrc;
+}
+
+window.onload = function() {
+	const ctx = init();
+	doIt(ctx).then(imgsrc => {
+		const img = document.createElement("img");
+		img.src = imgsrc;
+		document.body.appendChild(img);
+	})
 };
 
-/**
- * Main game running state, runs the drawing
- * @param {number} Timestamp
- */
-function MainRun(Timestamp) {
-	DrawProcess(Timestamp);
-	TimerProcess(Timestamp);
-}
-
-/**
- * When the user presses a key, we send the KeyDown event to the current screen if it can accept it
- * @param {KeyboardEvent} event
- */
-function KeyDown(event) {
-	if (event.repeat) return;
-	KeyPress = event.keyCode || event.which;
-	CommonKeyDown(event);
-}
-
-/**
- * Handler for document-wide keydown event
- * @param {KeyboardEvent} event
- */
-function DocumentKeyDown(event) {
-	if (event.repeat) return;
-	if (event.key == "Tab") {
-		KeyDown(event);
+function cropImageFromCanvas(ctx) {
+	var canvas = ctx.canvas, 
+	  w = canvas.width, h = canvas.height,
+	  pix = {x:[], y:[]},
+	  imageData = ctx.getImageData(0, 0, canvas.width,canvas.height),
+	  x, y, index;
+	
+	for (y = 0; y < h; y++) {
+	  for (x = 0; x < w; x++) {
+		index = (y * w + x) * 4;
+		if (imageData.data[index+3] > 0) {
+		  pix.x.push(x);
+		  pix.y.push(y);
+		} 
+	  }
 	}
-}
-
-/**
- * When the user clicks, we fire the click event for other screens
- * @param {MouseEvent} event
- */
-function Click(event) {
-	if (!CommonIsMobile) {
-		MouseMove(event);
-		CommonClick(event);
-	}
-}
-
-/**
- * When the user touches the screen (mobile only), we fire the click event for other screens
- * @param {TouchEvent} event
- */
-function TouchStart(event) {
-	if (CommonIsMobile && MainCanvas) {
-		TouchMove(event.touches[0]);
-		CommonClick(event);
-		CommonTouchList = event.touches;
-	}
-}
-
-/**
- * When the user touches the screen (mobile only), we fire the click event for other screens
- * @param {TouchEvent} event
- */
-function TouchEnd(event) {
-	if (CommonIsMobile && MainCanvas)
-		CommonTouchList = event.touches;
-}
-
-/**
- * When touch moves, we keep it's position for other scripts
- * @param {Touch} touch
- */
-function TouchMove(touch) {
-	if (MainCanvas) {
-		MouseX = Math.round((touch.pageX - MainCanvas.canvas.offsetLeft) * 2000 / MainCanvas.canvas.clientWidth);
-		MouseY = Math.round((touch.pageY - MainCanvas.canvas.offsetTop) * 1000 / MainCanvas.canvas.clientHeight);
-	}
-}
-
-/**
- * When mouse move, we keep the mouse position for other scripts
- * @param {MouseEvent} event
- */
-function MouseMove(event) {
-	if (MainCanvas) {
-		MouseX = Math.round(event.offsetX * 2000 / MainCanvas.canvas.clientWidth);
-		MouseY = Math.round(event.offsetY * 1000 / MainCanvas.canvas.clientHeight);
-	}
-}
-
-/**
- * When the mouse is away from the control, we stop keeping the coordinates,
- * we also check for false positives with "relatedTarget"
- * @param {MouseEvent} event
- */
-function LoseFocus(event) {
-	if (event.relatedTarget || event.toElement) {
-		MouseX = -1;
-		MouseY = -1;
-	}
+	pix.x.sort(function(a,b){return a-b});
+	pix.y.sort(function(a,b){return a-b});
+	var n = pix.x.length-1;
+	
+	w = 1 + pix.x[n] - pix.x[0];
+	h = 1 + pix.y[n] - pix.y[0];
+	var cut = ctx.getImageData(pix.x[0], pix.y[0], w, h);
+  
+	canvas.width = w;
+	canvas.height = h;
+	ctx.putImageData(cut, 0, 0);
+		  
+	var image = canvas.toDataURL();
+	return image;
 }

@@ -144,10 +144,10 @@ function ColorPickerGetCoordinates(Event) {
 	if (Event.changedTouches) {
 		// Mobile
 		var Touch = Event.changedTouches[0];
-		TouchMove(Touch);
+		// TouchMove(Touch);
 	} else {
 		// PC
-		MouseMove(Event);
+		// MouseMove(Event);
 	}
 
 	return { X: MouseX, Y: MouseY };

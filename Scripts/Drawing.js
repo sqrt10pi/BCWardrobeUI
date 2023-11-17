@@ -88,9 +88,7 @@ function DrawLoad() {
 	CharacterCanvas = document.createElement("canvas").getContext("2d");
 	CharacterCanvas.canvas.width = 500;
 	CharacterCanvas.canvas.height = CanvasDrawHeight;
-	document.getElementById("MainCanvas").addEventListener("keypress", KeyDown);
 	document.getElementById("MainCanvas").tabIndex = 1000;
-	document.addEventListener("keydown", DocumentKeyDown);
 
 	// Font is fixed for now, color can be set
 	MainCanvas.font = CommonGetFont(36);

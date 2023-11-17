@@ -74,7 +74,7 @@ type CommonChatTags =
 type NotificationAudioType = 0 | 1 | 2;
 type NotificationAlertType = 0 | 1 | 3 | 2;
 
-type DialogSortOrder = | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+type DialogSortOrder = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 type CharacterType = "online" | "npc" | "simple";
 
@@ -84,152 +84,222 @@ type VibratorModeSet = "Standard" | "Advanced";
 
 type VibratorModeState = "Default" | "Deny" | "Orgasm" | "Rest";
 
-type VibratorRemoteAvailability = "Available" | "NoRemote" | "NoRemoteOwnerRuleActive" | "NoLoversRemote" | "RemotesBlocked" | "CannotInteract" | "NoAccess" | "InvalidItem";
+type VibratorRemoteAvailability =
+	| "Available"
+	| "NoRemote"
+	| "NoRemoteOwnerRuleActive"
+	| "NoLoversRemote"
+	| "RemotesBlocked"
+	| "CannotInteract"
+	| "NoAccess"
+	| "InvalidItem";
 
 type EffectName =
-	"Freeze" | "Prone" | "Block" | "Mounted" | "KneelFreeze" | "ForceKneel" | "BlockKneel" |
-
-	"CuffedFeet" | "CuffedLegs" | "CuffedArms" | "IsChained" | "FixedHead" |
-
-	"Shackled" | "Tethered" | "Enclose" | "OneWayEnclose" | "OnBed" | "Lifted" | "Suspended" |
-
-	"Slow" | "FillVulva" | "IsPlugged" |
-
-	"Egged" | "Vibrating" |
-
-	"Edged" | "DenialMode" | "RuinOrgasms" |
-
-	"Remote" | "UseRemote" | "BlockRemotes" |
-
-	"Lock" | "NotSelfPickable" |
-
-	"Chaste" | "BreastChaste" | "ButtChaste" |
-
-	"Leash" | "CrotchRope" |
-
-	"ReceiveShock" | "TriggerShock" |
-
-	"OpenPermission" | "OpenPermissionArm" | "OpenPermissionLeg" | "OpenPermissionChastity" |
-
-	"BlockMouth" | "OpenMouth" |
-
-	"GagVeryLight" | "GagEasy" | "GagLight" | "GagNormal" | "GagMedium" | "GagHeavy" | "GagVeryHeavy" | "GagTotal" | "GagTotal2" |
-
-	"BlindLight" | "BlindNormal" | "BlindHeavy" | "BlindTotal" |
-	"BlurLight" | "BlurNormal" | "BlurHeavy" | "BlurTotal" |
-	"DeafLight" | "DeafNormal" | "DeafHeavy" | "DeafTotal" |
-
-	"VR" | "VRAvatars" | "KinkyDungeonParty" |
-
-	"LightBall" |
-
-	"RegressedTalk" |
-
-	"HideRestraints" |
-
-	"Unlock-MetalPadlock" | "Unlock-OwnerPadlock" | "Unlock-OwnerTimerPadlock" |
-	"Unlock-LoversPadlock" | "Unlock-LoversTimerPadlock" |
-	"Unlock-MistressPadlock" | "Unlock-MistressTimerPadlock" |
-	"Unlock-PandoraPadlock" | "Unlock-MetalCuffs" | "Unlock-" |
-
-	"ProtrudingMouth" | "Wiggling" |
-	""
-	;
+	| "Freeze"
+	| "Prone"
+	| "Block"
+	| "Mounted"
+	| "KneelFreeze"
+	| "ForceKneel"
+	| "BlockKneel"
+	| "CuffedFeet"
+	| "CuffedLegs"
+	| "CuffedArms"
+	| "IsChained"
+	| "FixedHead"
+	| "Shackled"
+	| "Tethered"
+	| "Enclose"
+	| "OneWayEnclose"
+	| "OnBed"
+	| "Lifted"
+	| "Suspended"
+	| "Slow"
+	| "FillVulva"
+	| "IsPlugged"
+	| "Egged"
+	| "Vibrating"
+	| "Edged"
+	| "DenialMode"
+	| "RuinOrgasms"
+	| "Remote"
+	| "UseRemote"
+	| "BlockRemotes"
+	| "Lock"
+	| "NotSelfPickable"
+	| "Chaste"
+	| "BreastChaste"
+	| "ButtChaste"
+	| "Leash"
+	| "CrotchRope"
+	| "ReceiveShock"
+	| "TriggerShock"
+	| "OpenPermission"
+	| "OpenPermissionArm"
+	| "OpenPermissionLeg"
+	| "OpenPermissionChastity"
+	| "BlockMouth"
+	| "OpenMouth"
+	| "GagVeryLight"
+	| "GagEasy"
+	| "GagLight"
+	| "GagNormal"
+	| "GagMedium"
+	| "GagHeavy"
+	| "GagVeryHeavy"
+	| "GagTotal"
+	| "GagTotal2"
+	| "BlindLight"
+	| "BlindNormal"
+	| "BlindHeavy"
+	| "BlindTotal"
+	| "BlurLight"
+	| "BlurNormal"
+	| "BlurHeavy"
+	| "BlurTotal"
+	| "DeafLight"
+	| "DeafNormal"
+	| "DeafHeavy"
+	| "DeafTotal"
+	| "VR"
+	| "VRAvatars"
+	| "KinkyDungeonParty"
+	| "LightBall"
+	| "RegressedTalk"
+	| "HideRestraints"
+	| "Unlock-MetalPadlock"
+	| "Unlock-OwnerPadlock"
+	| "Unlock-OwnerTimerPadlock"
+	| "Unlock-LoversPadlock"
+	| "Unlock-LoversTimerPadlock"
+	| "Unlock-MistressPadlock"
+	| "Unlock-MistressTimerPadlock"
+	| "Unlock-PandoraPadlock"
+	| "Unlock-MetalCuffs"
+	| "Unlock-"
+	| "ProtrudingMouth"
+	| "Wiggling"
+	| "";
 
 type AssetGroupItemName =
-	'ItemAddon' | 'ItemArms' | 'ItemBoots' | 'ItemBreast' | 'ItemButt' |
-	'ItemDevices' | 'ItemEars' | 'ItemFeet' | 'ItemHands' | 'ItemHead' |
-	'ItemHood' | 'ItemLegs' | 'ItemMisc' | 'ItemMouth' | 'ItemMouth2' |
-	'ItemMouth3' | 'ItemNeck' | 'ItemNeckAccessories' | 'ItemNeckRestraints' |
-	'ItemNipples' | 'ItemNipplesPiercings' | 'ItemNose' | 'ItemPelvis' |
-	'ItemTorso' | 'ItemTorso2'| 'ItemVulva' | 'ItemVulvaPiercings' |
-
-	'ItemHidden' /* TODO: investigate, not a real group */
-	;
+	| "ItemAddon"
+	| "ItemArms"
+	| "ItemBoots"
+	| "ItemBreast"
+	| "ItemButt"
+	| "ItemDevices"
+	| "ItemEars"
+	| "ItemFeet"
+	| "ItemHands"
+	| "ItemHead"
+	| "ItemHood"
+	| "ItemLegs"
+	| "ItemMisc"
+	| "ItemMouth"
+	| "ItemMouth2"
+	| "ItemMouth3"
+	| "ItemNeck"
+	| "ItemNeckAccessories"
+	| "ItemNeckRestraints"
+	| "ItemNipples"
+	| "ItemNipplesPiercings"
+	| "ItemNose"
+	| "ItemPelvis"
+	| "ItemTorso"
+	| "ItemTorso2"
+	| "ItemVulva"
+	| "ItemVulvaPiercings"
+	| "ItemHidden" /* TODO: investigate, not a real group */;
 
 type AssetGroupBodyName =
-	'Blush' | 'BodyLower' | 'BodyUpper' | 'Bra' | 'Bracelet' | 'Cloth' |
-	'ClothAccessory' | 'ClothLower' | 'Corset' | 'Emoticon' | 'Eyebrows' |
-	'Eyes' | 'Eyes2' | 'Fluids' | 'Garters' | 'Glasses' | 'Gloves' |
-	'HairAccessory1' | 'HairAccessory2' | 'HairAccessory3' | 'HairBack' |
-	'HairFront' | 'Hands' | 'Hat' | 'Head' | 'Height' | 'LeftAnklet' | 'Mask' |
-	'Mouth' | 'Necklace' | 'Nipples' | 'Panties' | 'Pussy' | 'RightAnklet' |
-	'Shoes' | 'Socks' | 'Suit' | 'SuitLower' | 'TailStraps' | 'Wings'
-	;
+	| "Blush"
+	| "BodyLower"
+	| "BodyUpper"
+	| "Bra"
+	| "Bracelet"
+	| "Cloth"
+	| "ClothAccessory"
+	| "ClothLower"
+	| "Corset"
+	| "Emoticon"
+	| "Eyebrows"
+	| "Eyes"
+	| "Eyes2"
+	| "Fluids"
+	| "Garters"
+	| "Glasses"
+	| "Gloves"
+	| "HairAccessory1"
+	| "HairAccessory2"
+	| "HairAccessory3"
+	| "HairBack"
+	| "HairFront"
+	| "Hands"
+	| "Hat"
+	| "Head"
+	| "Height"
+	| "LeftAnklet"
+	| "Mask"
+	| "Mouth"
+	| "Necklace"
+	| "Nipples"
+	| "Panties"
+	| "Pussy"
+	| "RightAnklet"
+	| "Shoes"
+	| "Socks"
+	| "Suit"
+	| "SuitLower"
+	| "TailStraps"
+	| "Wings";
 
 type AssetGroupName = AssetGroupBodyName | AssetGroupItemName;
 
 type AssetPoseName =
-	'AllFours' | 'BackBoxTie' | 'BackCuffs' | 'BackElbowTouch' | 'BaseLower' |
-	'BaseUpper' | 'Hogtied' | 'Horse' | 'Kneel' | 'KneelingSpread' | 'LegsClosed' |
-	'LegsOpen' | 'OverTheHead' | 'Spread' | 'Suspension' | 'SuspensionHogtied' |
-	'TapedHands' | 'Yoked' |
+	| "AllFours"
+	| "BackBoxTie"
+	| "BackCuffs"
+	| "BackElbowTouch"
+	| "BaseLower"
+	| "BaseUpper"
+	| "Hogtied"
+	| "Horse"
+	| "Kneel"
+	| "KneelingSpread"
+	| "LegsClosed"
+	| "LegsOpen"
+	| "OverTheHead"
+	| "Spread"
+	| "Suspension"
+	| "SuspensionHogtied"
+	| "TapedHands"
+	| "Yoked"
 
 	/* FIXME: Those are pose categories */
-	'BodyUpper' | 'BodyLower'
-	;
+	| "BodyUpper"
+	| "BodyLower";
 
 type AssetLockType =
-	"CombinationPadlock" | "ExclusivePadlock" | "HighSecurityPadlock" |
-	"IntricatePadlock" | "LoversPadlock" | "LoversTimerPadlock" |
-	"MetalPadlock" | "MistressPadlock" | "MistressTimerPadlock" |
-	"OwnerPadlock" | "OwnerTimerPadlock" | "PandoraPadlock" |
-	"PasswordPadlock" | "SafewordPadlock" | "TimerPadlock" |
-	"TimerPasswordPadlock"
-	;
+	| "CombinationPadlock"
+	| "ExclusivePadlock"
+	| "HighSecurityPadlock"
+	| "IntricatePadlock"
+	| "LoversPadlock"
+	| "LoversTimerPadlock"
+	| "MetalPadlock"
+	| "MistressPadlock"
+	| "MistressTimerPadlock"
+	| "OwnerPadlock"
+	| "OwnerTimerPadlock"
+	| "PandoraPadlock"
+	| "PasswordPadlock"
+	| "SafewordPadlock"
+	| "TimerPadlock"
+	| "TimerPasswordPadlock";
 
 //#endregion
 
 //#region index.html
-
-/**
- * Main game running state, runs the drawing
- * @param {number} Timestamp
- */
-declare function MainRun(Timestamp: number): void;
-
-/**
- * When the user presses a key, we send the KeyDown event to the current screen if it can accept it
- * @param {KeyboardEvent} event
- */
-declare function KeyDown(event: KeyboardEvent): void;
-
-/**
- * Handler for document-wide keydown event
- * @param {KeyboardEvent} event
- */
-declare function DocumentKeyDown(event: KeyboardEvent): void;
-
-/**
- * When the user clicks, we fire the click event for other screens
- * @param {MouseEvent} event
- */
-declare function Click(event: MouseEvent): void;
-
-/**
- * When the user touches the screen (mobile only), we fire the click event for other screens
- * @param {TouchEvent} event
- */
-declare function TouchStart(event: TouchEvent): void;
-
-/**
- * When touch moves, we keep it's position for other scripts
- * @param {Touch} touch
- */
-declare function TouchMove(touch: Touch): void;
-
-/**
- * When mouse move, we keep the mouse position for other scripts
- * @param {MouseEvent} event
- */
-declare function MouseMove(event: MouseEvent): void;
-
-/**
- * When the mouse is away from the control, we stop keeping the coordinates,
- * we also check for false positives with "relatedTarget"
- * @param {MouseEvent} event
- */
-declare function LoseFocus(event: MouseEvent): void;
 
 //#endregion
 
@@ -247,10 +317,10 @@ interface IChatRoomGameResponse {
 
 		/* MagicBattle */
 		Spell?: string;
-		Time?: number; /* ms */
-	}
+		Time?: number /* ms */;
+	};
 	Sender: number;
-	RNG: number
+	RNG: number;
 }
 
 //#endregion
@@ -269,10 +339,15 @@ interface ChatRoom {
 	Locked: boolean;
 	BlockCategory: string[];
 	Language: string;
-	Character?: any[]; /* From server, not really a Character object */
+	Character?: any[] /* From server, not really a Character object */;
 }
 
-type StimulationAction = "Kneel" | "Walk" | "Struggle" | "StruggleFail" | "Talk";
+type StimulationAction =
+	| "Kneel"
+	| "Walk"
+	| "Struggle"
+	| "StruggleFail"
+	| "Talk";
 
 interface StimulationEvent {
 	/** The chance that this event will trigger at 0 arousal */
@@ -287,8 +362,16 @@ interface StimulationEvent {
 	TalkChance?: number;
 }
 
-type MessageActionType = "Action" | "Chat" | "Whisper" | "Emote" | "Activity" | "Hidden" |
-	"LocalMessage" | "ServerMessage" | "Status";
+type MessageActionType =
+	| "Action"
+	| "Chat"
+	| "Whisper"
+	| "Emote"
+	| "Activity"
+	| "Hidden"
+	| "LocalMessage"
+	| "ServerMessage"
+	| "Status";
 
 type MessageContentType = string;
 
@@ -314,10 +397,10 @@ interface IChatRoomMessage extends IChatRoomMessageBasic {
 }
 
 interface IChatRoomSyncBasic {
-	SourceMemberNumber: number
+	SourceMemberNumber: number;
 }
 
-interface IChatRoomSyncMessage extends IChatRoomSyncBasic, ChatRoom { }
+interface IChatRoomSyncMessage extends IChatRoomSyncBasic, ChatRoom {}
 
 /**
  * A metadata extractor for a given message.
@@ -329,8 +412,10 @@ interface IChatRoomSyncMessage extends IChatRoomSyncBasic, ChatRoom { }
  *  - `substitutions`: an array of [tag, substitutions] to perform on the message.
  * @return null if the extraction has nothing to report.
  */
-type ChatRoomMessageExtractor =
-	(data: IChatRoomMessage, sender: Character) => { metadata: object, substitutions: string[][] } | null;
+type ChatRoomMessageExtractor = (
+	data: IChatRoomMessage,
+	sender: Character
+) => { metadata: object; substitutions: string[][] } | null;
 
 /**
  * A chat message handler.
@@ -391,7 +476,14 @@ interface ChatRoomMessageHandler {
 	 * @param metadata - The collected metadata from the message's dictionary, only available in "post" mode.
 	 * @returns {boolean} true if the message was handled and the processing should stop, false otherwise.
 	 */
-	Callback: (data: IChatRoomMessage, sender: Character, msg: string, metadata?: any) => boolean | { msg?: string; skip?: (handler: ChatRoomMessageHandler) => boolean };
+	Callback: (
+		data: IChatRoomMessage,
+		sender: Character,
+		msg: string,
+		metadata?: any
+	) =>
+		| boolean
+		| { msg?: string; skip?: (handler: ChatRoomMessageHandler) => boolean };
 }
 
 //#endregion
@@ -399,7 +491,7 @@ interface ChatRoomMessageHandler {
 //#region FriendList
 
 interface IFriendListBeepLogMessage {
-	MemberNumber?: number; /* undefined for NPCs */
+	MemberNumber?: number /* undefined for NPCs */;
 	MemberName: string;
 	ChatRoomName?: string;
 	Private: boolean;
@@ -421,7 +513,7 @@ interface AssetGroup {
 	Description: string;
 	Asset: Asset[];
 	ParentGroupName: string;
-	Category: 'Appearance' | 'Item';
+	Category: "Appearance" | "Item";
 	IsDefault: boolean;
 	IsRestraint: boolean;
 	AllowNone: boolean;
@@ -604,7 +696,7 @@ interface Asset {
 	OwnerOnly: boolean;
 	LoverOnly: boolean;
 	ExpressionTrigger?: ExpressionTrigger[];
-	RemoveItemOnRemove: { Name: string; Group: string; Type?: string; }[];
+	RemoveItemOnRemove: { Name: string; Group: string; Type?: string }[];
 	AllowEffect?: EffectName[];
 	AllowBlock?: AssetGroupItemName[];
 	AllowType?: string[];
@@ -624,7 +716,9 @@ interface Asset {
 	DynamicDescription: (C: Character) => string;
 	DynamicPreviewImage: (C: Character) => string;
 	DynamicAllowInventoryAdd: (C: Character) => boolean;
-	DynamicExpressionTrigger: (C: Character) => ExpressionTrigger[] | null | undefined;
+	DynamicExpressionTrigger: (
+		C: Character
+	) => ExpressionTrigger[] | null | undefined;
 	DynamicName: (C: Character) => string;
 	DynamicGroupName: AssetGroupName;
 	DynamicActivity: (C: Character) => string | null | undefined;
@@ -654,7 +748,7 @@ interface Asset {
 	AllowTint: boolean;
 	DefaultTint?: string;
 	CraftGroup: string;
-	ColorSuffix: { [string]: string};
+	ColorSuffix: { [string]: string };
 }
 
 //#endregion
@@ -674,13 +768,13 @@ type AppearanceBundle = ItemBundle[];
 
 interface Pose {
 	Name: string;
-	Category?: 'BodyUpper' | 'BodyLower' | 'BodyFull';
+	Category?: "BodyUpper" | "BodyLower" | "BodyFull";
 	AllowMenu?: true;
 	/** Only show in menu if an asset supports it */
 	AllowMenuTransient?: true;
 	OverrideHeight?: AssetOverrideHeight;
 	Hide?: string[];
-	MovePosition?: { Group: string; X: number; Y: number; }[];
+	MovePosition?: { Group: string; X: number; Y: number }[];
 }
 
 interface Activity {
@@ -722,7 +816,14 @@ interface CraftedItemProperties {
 
 type FavoriteIcon = "Favorite" | "FavoriteBoth" | "FavoritePlayer";
 
-type InventoryIcon = FavoriteIcon | "AllowedLimited" | "Handheld" | "Locked" | "LoverOnly" | "OwnerOnly" | "Unlocked";
+type InventoryIcon =
+	| FavoriteIcon
+	| "AllowedLimited"
+	| "Handheld"
+	| "Locked"
+	| "LoverOnly"
+	| "OwnerOnly"
+	| "Unlocked";
 
 interface DialogInventoryItem extends Item {
 	Worn: boolean;
@@ -923,7 +1024,11 @@ interface Character {
 	DrawAppearance?: Item[];
 	AppearanceLayers?: AssetLayer[];
 	Hooks: Map<string, Map<string, any>> | null;
-	RegisterHook: (hookName: string, hookInstance: string, callback: any) => boolean | any;
+	RegisterHook: (
+		hookName: string,
+		hookInstance: string,
+		callback: any
+	) => boolean | any;
 	UnregisterHook: (hookName: string, hookInstance: string) => boolean;
 	HeightRatioProportion?: number;
 	// Properties created in other places
@@ -964,9 +1069,9 @@ interface Character {
 		ItemsAffectExpressions: boolean;
 	};
 	Game?: {
-		LARP?: GameLARPParameters,
-		MagicBattle?: GameMagicBattleParameters,
-		GGTS?: GameGGTSParameters,
+		LARP?: GameLARPParameters;
+		MagicBattle?: GameMagicBattleParameters;
+		GGTS?: GameGGTSParameters;
 	};
 	BlackList: number[];
 	RunScripts?: boolean;
@@ -986,9 +1091,17 @@ interface Character {
 
 type NPCArchetype =
 	/* Pandora NPCs */
-	"MemberNew"|"MemberOld"|"Cosplay"|"Mistress"|"Slave"|"Maid"|"Guard"|
+	| "MemberNew"
+	| "MemberOld"
+	| "Cosplay"
+	| "Mistress"
+	| "Slave"
+	| "Maid"
+	| "Guard"
 	/* Pandora Special */
-	"Victim"|"Target"|"Chest";
+	| "Victim"
+	| "Target"
+	| "Chest";
 
 /** NPC Character extension */
 // FIXME: That one should find its way down to NPCCharacter, but
@@ -997,8 +1110,8 @@ type NPCArchetype =
 interface Character {
 	/** NPC type: Slave, Maid, etc. */
 	Archetype?: NPCArchetype;
-	Love?: number; /** The NPC's love value */
-	WillRelease?(): boolean; /** Shop NPC-only: will it release the player when asked */
+	Love?: number /** The NPC's love value */;
+	WillRelease?(): boolean /** Shop NPC-only: will it release the player when asked */;
 }
 
 /** NPC-only */
@@ -1189,7 +1302,7 @@ interface PlayerCharacter extends Character {
 		SmoothZoom: boolean;
 		CenterChatrooms: boolean;
 		AllowBlur: boolean;
-	}
+	};
 	NotificationSettings?: {
 		/** @deprecated */
 		Audio?: boolean;
@@ -1221,7 +1334,7 @@ interface PlayerCharacter extends Character {
 	GhostList?: number[];
 	Wardrobe?: any[][];
 	WardrobeCharacterNames?: string[];
-	SavedExpressions?: ({ Group: string, CurrentExpression?: string }[] | null)[];
+	SavedExpressions?: ({ Group: string; CurrentExpression?: string }[] | null)[];
 	SavedColors: HSVColor[];
 	FriendList?: number[];
 	FriendNames?: Map<number, string>;
@@ -1238,9 +1351,9 @@ interface PlayerCharacter {
 			Background: string;
 			Difficulty: number;
 			FightDone?: boolean;
-		}
+		};
 		Perks?: string;
-	}
+	};
 }
 
 /** Kinky Dungeon Player extension */
@@ -1436,7 +1549,7 @@ interface ItemPropertiesCustom {
 	Revert?: boolean;
 }
 
-interface ItemProperties extends ItemPropertiesBase, ItemPropertiesCustom { }
+interface ItemProperties extends ItemPropertiesBase, ItemPropertiesCustom {}
 
 /**
  * An object containing the extended item definition for an asset.
@@ -1448,13 +1561,17 @@ interface ExtendedItemAssetConfig<Archetype extends ExtendedArchetype, Config> {
 	/** The specific configuration for the item (type will vary based on the item's archetype) */
 	Config?: Config;
 	/** The group name and asset name of a configuration to copy - useful if multiple items share the same config */
-	CopyConfig?: { GroupName?: string, AssetName: string };
+	CopyConfig?: { GroupName?: string; AssetName: string };
 }
 
 /**
  * Valid extended item configuration types
  */
-type AssetArchetypeConfig = TypedItemAssetConfig | ModularItemAssetConfig | VibratingItemAssetConfig | VariableHeightAssetConfig;
+type AssetArchetypeConfig =
+	| TypedItemAssetConfig
+	| ModularItemAssetConfig
+	| VibratingItemAssetConfig
+	| VariableHeightAssetConfig;
 
 /**
  * An object containing extended item definitions for a group.
@@ -1506,7 +1623,11 @@ interface ExtendedItemOption {
 	/** If the option has a subscreen, this can set a particular archetype to use */
 	Archetype?: ExtendedArchetype;
 	/** If the option has an archetype, sets the config to use */
-	ArchetypeConfig?: TypedItemConfig | ModularItemConfig | VibratingItemConfig | VariableHeightConfig
+	ArchetypeConfig?:
+		| TypedItemConfig
+		| ModularItemConfig
+		| VibratingItemConfig
+		| VariableHeightConfig;
 }
 
 /**
@@ -1533,7 +1654,7 @@ interface ExtendedItemChatData<OptionType> {
  * @template OptionType
  */
 type ExtendedItemChatCallback<OptionType> = (
-	chatData: ExtendedItemChatData<OptionType>,
+	chatData: ExtendedItemChatData<OptionType>
 ) => string;
 
 /**
@@ -1548,7 +1669,7 @@ type ExtendedItemValidateCallback<OptionType> = (
 	C: Character,
 	Item: Item,
 	Option: OptionType,
-	CurrentOption: OptionType,
+	CurrentOption: OptionType
 ) => string;
 
 /**
@@ -1565,7 +1686,7 @@ type ExtendedItemValidateScriptHookCallback<OptionType> = (
 	C: Character,
 	Item: Item,
 	Option: OptionType,
-	CurrentOption: OptionType,
+	CurrentOption: OptionType
 ) => string;
 
 //#endregion
@@ -1573,7 +1694,10 @@ type ExtendedItemValidateScriptHookCallback<OptionType> = (
 //#region Modular items
 
 /** An object containing the extended item definition for a modular asset. */
-type ModularItemAssetConfig = ExtendedItemAssetConfig<"modular", ModularItemConfig>;
+type ModularItemAssetConfig = ExtendedItemAssetConfig<
+	"modular",
+	ModularItemConfig
+>;
 
 /** An object defining all of the required configuration for registering a modular item */
 interface ModularItemConfig {
@@ -1733,7 +1857,10 @@ interface ModularItemData {
 	/** A lookup for the current page in the extended item menu for each of the item's modules */
 	pages: Record<string, number>;
 	/** A lookup for the draw data for each of the item's modules */
-	drawData: Record<string, { pageCount: number, paginate: boolean, positions: number[][] }>;
+	drawData: Record<
+		string,
+		{ pageCount: number; paginate: boolean; positions: number[][] }
+	>;
 	/** A lookup for the draw functions for each of the item's modules */
 	drawFunctions: Record<string, () => void>;
 	/** A lookup for the click functions for each of the item's modules */
@@ -1748,11 +1875,11 @@ interface ModularItemData {
 	 * and parameters passed on to them. If undefined, these are ignored
 	 */
 	scriptHooks?: {
-		load?: (next: () => void) => void,
-		click?: (next: () => void) => void,
-		draw?: (next: () => void) => void,
-		exit?: () => void,
-		validate?: ExtendedItemValidateScriptHookCallback<ModularItemOption>,
+		load?: (next: () => void) => void;
+		click?: (next: () => void) => void;
+		draw?: (next: () => void) => void;
+		exit?: () => void;
+		validate?: ExtendedItemValidateScriptHookCallback<ModularItemOption>;
 	};
 }
 
@@ -1812,11 +1939,11 @@ interface TypedItemConfig {
 	 * and parameters passed on to them. If undefined, these are ignored
 	 */
 	ScriptHooks?: {
-		Load?: (next: () => void) => void,
-		Click?: (next: () => void) => void,
-		Draw?: (next: () => void) => void,
-		Exit?: () => void,
-		Validate?: ExtendedItemValidateScriptHookCallback<ExtendedItemOption>,
+		Load?: (next: () => void) => void;
+		Click?: (next: () => void) => void;
+		Draw?: (next: () => void) => void;
+		Exit?: () => void;
+		Validate?: ExtendedItemValidateScriptHookCallback<ExtendedItemOption>;
 	};
 }
 
@@ -1902,11 +2029,11 @@ interface TypedItemData {
 	 * and parameters passed on to them. If undefined, these are ignored
 	 */
 	scriptHooks?: {
-		load?: (next: () => void) => void,
-		click?: (next: () => void) => void,
-		draw?: (next: () => void) => void,
-		exit?: () => void,
-		validate?: ExtendedItemValidateScriptHookCallback<ExtendedItemOption>,
+		load?: (next: () => void) => void;
+		click?: (next: () => void) => void;
+		draw?: (next: () => void) => void;
+		exit?: () => void;
+		validate?: ExtendedItemValidateScriptHookCallback<ExtendedItemOption>;
 	};
 }
 
@@ -1922,7 +2049,7 @@ interface TypedItemData {
  */
 type TypedItemDictionaryCallback = (
 	chatData: ExtendedItemChatData<ExtendedItemOption>
-) => { Tag: string, Text: string };
+) => { Tag: string; Text: string };
 
 /**
  * A parameter object containing information used to validate and sanitize character appearance update diffs. An
@@ -1990,7 +2117,10 @@ interface AppearanceValidationWrapper {
 //#region Vibrating Items
 
 /** An object containing the extended item definition for a vibrating asset. */
-type VibratingItemAssetConfig = ExtendedItemAssetConfig<"vibrating", VibratingItemConfig>;
+type VibratingItemAssetConfig = ExtendedItemAssetConfig<
+	"vibrating",
+	VibratingItemConfig
+>;
 
 /** An object defining all of the required configuration for registering a vibrator item */
 interface VibratingItemConfig {
@@ -2026,7 +2156,10 @@ interface StateAndIntensity {
 //#region Variable Height items
 
 /** An object containing the extended item definition for a variable height asset. */
-type VariableHeightAssetConfig = ExtendedItemAssetConfig<"variableheight", VariableHeightConfig>;
+type VariableHeightAssetConfig = ExtendedItemAssetConfig<
+	"variableheight",
+	VariableHeightConfig
+>;
 
 interface VariableHeightConfig {
 	/** The highest Y co-ordinate that can be set  */
@@ -2122,9 +2255,19 @@ interface ICommand {
 	Tag: string;
 	Description?: string;
 	Reference?: string;
-	Action?: (this: Optional<ICommand, 'Tag'>, args: string, msg: string, parsed: string[]) => void
-	Prerequisite?: (this: Optional<ICommand, 'Tag'>) => boolean;
-	AutoComplete?: (this: Optional<ICommand, 'Tag'>, parsed: string[], low: string, msg: string) => void;
+	Action?: (
+		this: Optional<ICommand, "Tag">,
+		args: string,
+		msg: string,
+		parsed: string[]
+	) => void;
+	Prerequisite?: (this: Optional<ICommand, "Tag">) => boolean;
+	AutoComplete?: (
+		this: Optional<ICommand, "Tag">,
+		parsed: string[],
+		low: string,
+		msg: string
+	) => void;
 	Clear?: false;
 }
 
@@ -2217,7 +2360,7 @@ interface AudioChatAction {
 	IsAction: (data: IChatRoomMessage) => boolean;
 
 	/** Extracts the actual sound effect from the chat message */
-	GetSoundEffect: (data: IChatRoomMessage) => (AudioSoundEffect | string | null);
+	GetSoundEffect: (data: IChatRoomMessage) => AudioSoundEffect | string | null;
 }
 
 // #endregion
@@ -2243,7 +2386,7 @@ type DrawCanvasCallback = (
 	img: HTMLImageElement | HTMLCanvasElement,
 	x: number,
 	y: number,
-	alphaMasks?: RectTuple[],
+	alphaMasks?: RectTuple[]
 ) => void;
 
 /**
@@ -2261,7 +2404,7 @@ type DrawImageCallback = (
 	y: number,
 	alphasMasks: RectTuple[],
 	opacity?: number,
-	rotate?: boolean,
+	rotate?: boolean
 ) => void;
 
 /**
@@ -2284,7 +2427,7 @@ type DrawImageColorizeCallback = (
 	fullAlpha: boolean,
 	alphaMasks?: RectTuple[],
 	opacity?: number,
-	rotate?: boolean,
+	rotate?: boolean
 ) => void;
 
 interface CommonDrawCallbacks {
@@ -2363,7 +2506,9 @@ interface DynamicBeforeDrawOverrides {
 /**
  * A dynamic BeforeDraw callback
  */
-type DynamicBeforeDrawCallback = (data: DynamicDrawingData) => DynamicBeforeDrawOverrides;
+type DynamicBeforeDrawCallback = (
+	data: DynamicDrawingData
+) => DynamicBeforeDrawOverrides;
 
 /**
  * A dynamic AfterDraw callback
@@ -2373,13 +2518,26 @@ type DynamicAfterDrawCallback = (data: DynamicDrawingData) => void;
 /**
  * A dynamic ScriptDraw callback
  */
-type DynamicScriptDrawCallback = (data: {C: Character, Item: Item, PersistentData: <T>() => T}) => void;
+type DynamicScriptDrawCallback = (data: {
+	C: Character;
+	Item: Item;
+	PersistentData: <T>() => T;
+}) => void;
 
 // #endregion
 
 //#region Infiltration/Pandora
 
-type InfiltrationTargetType = "NPC" | "USBKey" | "BDSMPainting" | "GoldCollar" | "GeneralLedger" | "SilverVibrator" | "DiamondRing" | "SignedPhoto" | "PandoraPadlockKeys";
+type InfiltrationTargetType =
+	| "NPC"
+	| "USBKey"
+	| "BDSMPainting"
+	| "GoldCollar"
+	| "GeneralLedger"
+	| "SilverVibrator"
+	| "DiamondRing"
+	| "SignedPhoto"
+	| "PandoraPadlockKeys";
 
 interface InfiltrationMissionTarget {
 	Type: InfiltrationTargetType;

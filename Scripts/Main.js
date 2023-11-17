@@ -39,7 +39,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 let hasInit = false;
 let ctxStash;
 
-function init(){
+async function init(){
 	if (hasInit) {
 		return ctxStash
 	}
@@ -59,8 +59,12 @@ function init(){
 	return ctx;
 }
 
-async function doIt(ctx) {
+async function renderCharToData() {
+	const ctx = await init();
+
 	let Char = CharacterReset(0, "Female3DCG");
+
+	// timing dependent... on my local machine 10 fails, 20 intermittent, 50 consistently passes. Probably dependent on network loads so we really should find a way to detect all network complete as part of init maybe?
 
 	await sleep(50);
 
@@ -71,8 +75,7 @@ async function doIt(ctx) {
 }
 
 window.onload = function() {
-	const ctx = init();
-	doIt(ctx).then(imgsrc => {
+	renderCharToData().then(imgsrc => {
 		const img = document.createElement("img");
 		img.src = imgsrc;
 		document.body.appendChild(img);
@@ -109,4 +112,8 @@ function cropImageFromCanvas(ctx) {
 		  
 	var image = canvas.toDataURL();
 	return image;
+}
+
+module.exports = {
+	renderCharToData
 }

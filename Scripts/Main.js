@@ -1,39 +1,3 @@
-// While we want KD to be backwards compatible with BC, we want to avoid making modifications that are standalone specific to the KD code itself
-// These bootstraps must be loaded last, as they replace BC specific KD functionality
-KinkyDungeonMainRun = () => {};
-KinkyDungeonMainClick = () => {};
-
-ChatRoomChatLog = [];
-ChatRoomLastMessage = [];
-
-PreferenceMessage = "";
-
-ChatRoomCharacterUpdate = () => {};
-ChatRoomCharacterItemUpdate = () => {};
-
-ArcadeKinkyDungeonEnd = () => {}
-KinkyDungeonMultiplayerUpdate = () => {};
-
-ArcadeDeviousDungeonChallenge = false;
-
-const _CharacterAppearanceSetDefault = CharacterAppearanceSetDefault;
-const _CharacterAppearanceFullRandom = CharacterAppearanceFullRandom;
-const _CharacterLoadCanvas = CharacterLoadCanvas;
-const _CharacterRefresh = CharacterRefresh;
-
-function suppressCanvasUpdate(fn) {
-	CharacterAppearanceSetDefault = () => {};
-	CharacterAppearanceFullRandom = () => {};
-	CharacterLoadCanvas = () => {};
-	CharacterRefresh = () => {};
-	let ret = fn();
-	CharacterAppearanceSetDefault = _CharacterAppearanceSetDefault;
-	CharacterAppearanceFullRandom = _CharacterAppearanceFullRandom;
-	CharacterLoadCanvas = _CharacterLoadCanvas;
-	CharacterRefresh = _CharacterRefresh;
-	return ret;
-}
-
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 let hasInit = false;
@@ -47,20 +11,65 @@ async function init(){
 	AssetLoadAll();
 
 	const canvas = document.createElement("canvas");
-	canvas.style.background = "red";
 	canvas.height = 1000;
 	canvas.width = 2000;
 	const ctx = canvas.getContext("2d");
 	ctxStash = ctx;
 	hasInit = true;
 
+	// @ts-expect-error blah
 	MainCanvas = {};
+	globalThis.ChatRoomLastMessage = {};
 
 	return ctx;
 }
 
-async function renderCharToData() {
+function ApplyOutfit(C, bundleString) {
+	if (!bundleString) {
+		return;
+	}
+
+	try {
+		const bundle = /** @type {ItemBundle[]} */ (
+			bundleString.startsWith("[")
+				? JSON.parse(bundleString)
+				: JSON.parse(LZString.decompressFromBase64(bundleString))
+		);
+
+		if (
+			!Array.isArray(bundle) ||
+			bundle.length === 0 ||
+			!bundle[0].Group
+		) {
+			throw new Error("Invalid bundle");
+		}
+
+		C.MemberNumber = 1;
+
+		ServerAppearanceLoadFromBundle(
+			C,
+			"Female3DCG",
+			bundle,
+			C.MemberNumber
+		);
+
+		CharacterRefresh(C, false, false);
+	} catch (e) {
+		console.error(e);
+	}
+}
+
+
+async function renderCharToData(outfit) {
 	const ctx = await init();
+
+	// Cheap way to clear the canvas
+	ctx.canvas.height = 1001;
+	ctx.canvas.height = 1000;
+	ctx.canvas.width = 2000;
+	// @ts-expect-error blah
+	MainCanvas = {};
+	globalThis.ChatRoomLastMessage = {};
 
 	let Char = CharacterReset(0, "Female3DCG");
 
@@ -68,19 +77,16 @@ async function renderCharToData() {
 
 	await sleep(50);
 
-	DrawCharacter(Char, 1, 0, 1, true, ctx)
+	ApplyOutfit(Char, outfit);
 
-	const imgsrc = cropImageFromCanvas(ctx)
+	await sleep(1000);
+
+	DrawCharacter(Char, 1, 0, 1, true, ctx);
+
+	const imgsrc = cropImageFromCanvas(ctx);
+
 	return imgsrc;
 }
-
-window.onload = function() {
-	renderCharToData().then(imgsrc => {
-		const img = document.createElement("img");
-		img.src = imgsrc;
-		document.body.appendChild(img);
-	})
-};
 
 function cropImageFromCanvas(ctx) {
 	var canvas = ctx.canvas, 
@@ -114,6 +120,7 @@ function cropImageFromCanvas(ctx) {
 	return image;
 }
 
-module.exports = {
+// @ts-expect-error I'm defining this...
+window.bc = {
 	renderCharToData
 }

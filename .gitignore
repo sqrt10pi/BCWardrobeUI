@@ -13,6 +13,8 @@
 !/Mods/example_enemy.zip
 !/Mods/example_enemy/**/*
 
+!/files.txt
+!/build.js
 !/.editorconfig
 !/.eslintrc.json
 !/.gitignore

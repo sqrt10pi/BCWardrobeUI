@@ -26,7 +26,7 @@ const ValidationModifiableProperties = ValidationAllLockProperties.concat(["Effe
  * target and source characters
  */
 function ValidationCreateDiffParams(C, sourceMemberNumber) {
-	const fromSelf = false;
+	const fromSelf = true;
 	const fromOwner = false;
 	const fromLover = false;
 	return { C, fromSelf, fromOwner, fromLover, sourceMemberNumber };
